@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="kk">
+<!DOCTYPE html>
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -122,43 +123,44 @@
         <p class="details"><strong>Өтетін орны:</strong> "Жетісу" мейрамханасы</p>
         <div class="form-container">
             <h2>Сіз келе аласыз ба?</h2>
-            <form action="https://docs.google.com/forms/d/e/your-form-url/formResponse" method="post">
+            <form action="send_email.php" method="post">
                 <label for="name">Аты-жөніңіз:</label>
-                <input type="text" id="name" name="entry.123456789" required><label for="attendance">Қатысуыңыз:</label>
-            <select id="attendance" name="entry.987654321">
-                <option value="yes">Иә, міндетті түрде келемін</option>
-                <option value="maybe">Әлі белгісіз</option>
-                <option value="no">Өкінішке орай, келе алмаймын</option>
-            </select>
-            
-            <button type="submit">Жіберу</button>
-        </form>
+                <input type="text" id="name" name="name" required><br><br>
+                
+                <label for="attendance">Қатысуыңыз:</label>
+                <select id="attendance" name="attendance">
+                    <option value="yes">Иә, міндетті түрде келемін</option>
+                    <option value="maybe">Әлі белгісіз</option>
+                    <option value="no">Өкінішке орай, келе алмаймын</option>
+                </select><br><br>
+                
+                <button type="submit">Жіберу</button>
+            </form>
+        </div>
     </div>
-</div>
-<script>
-    let currentIndex = 0;
-    const slides = document.querySelectorAll('.photo-slide');
-    const totalSlides = slides.length;
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.photo-slide');
+        const totalSlides = slides.length;
 
-    function updateSlider() {
-        document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
-    }
+        function updateSlider() {
+            document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
+        }
 
-    document.querySelector('.next').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
-    });
+        document.querySelector('.next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        });
 
-    document.querySelector('.prev').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    });
+        document.querySelector('.prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
 
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
-    }, 4000);
-</script>
-
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }, 4000);
+    </script>
 </body>
 </html>

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="kk">
+<!DOCTYPE html><html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +41,7 @@
         .photo-slides {
             display: flex;
             transition: transform 0.8s ease-in-out;
-            width: 100%;
+            width: 400%;
         }
         .photo-slide {
             min-width: 100%;
@@ -52,7 +51,7 @@
         .photo {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Обеспечиваем правильное заполнение пространства */
+            object-fit: cover;
             border-radius: 10px;
             border: 5px solid #d36b6b;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -124,7 +123,7 @@
         <p class="details"><strong>Өтетін орны:</strong> "Жетісу" мейрамханасы</p>
         <div class="form-container">
             <h2>Сіз келе аласыз ба?</h2>
-            <form action="https://formsubmit.co/holiday190425@gmail.com" method="POST">
+            <form id="rsvp-form">
                 <label for="name">Аты-жөніңіз:</label>
                 <input type="text" id="name" name="name" required>
                 <label for="attendance">Қатысуыңыз:</label>
@@ -135,27 +134,26 @@
                 </select>
                 <button type="submit">Жіберу</button>
             </form>
+            <p id="success-message" style="display: none; color: green; font-weight: bold; margin-top: 10px;">Рахмет! Жауабыңыз қабылданды.</p>
         </div>
     </div>
     <script>
-        let currentIndex = 0;
-        const slides = document.querySelectorAll('.photo-slide');
-        const totalSlides = slides.length;
-        function updateSlider() {
-            document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
-        }
-        document.querySelector('.next').addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
+        document.getElementById('rsvp-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('https://formsubmit.co/ajax/holiday190425@gmail.com', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('rsvp-form').reset();
+                    document.getElementById('success-message').style.display = 'block';
+                }
+            })
+            .catch(error => console.error('Қате:', error));
         });
-        document.querySelector('.prev').addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        });
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
-        }, 4000);
     </script>
 </body>
 </html>

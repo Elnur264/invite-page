@@ -123,15 +123,24 @@
         <p class="details"><strong>Өтетін орны:</strong> "Жетісу" мейрамханасы</p>
         <div class="form-container">
             <h2>Сіз келе аласыз ба?</h2>
-            <form action="https://formsubmit.co/your-email@example.com" method="POST">
-    <input type="text" name="name" placeholder="Ваше имя" required>
-    <input type="email" name="email" placeholder="Ваш email" required>
-    <textarea name="message" placeholder="Ваше сообщение" required></textarea>
-    
-    <!-- Защита от спама -->
+            <form action="https://formsubmit.co/YOUR-EMAIL" method="post">
+    <label for="name">Аты-жөніңіз:</label>
+    <input type="text" id="name" name="entry.123456789" required>
+
+    <label for="attendance">Қатысуыңыз:</label>
+    <select id="attendance" name="entry.987654321">
+        <option value="yes">Иә, міндетті түрде келемін</option>
+        <option value="maybe">Әлі белгісіз</option>
+        <option value="no">Өкінішке орай, келе алмаймын</option>
+    </select>
+
+    <!-- Антиспам-поля -->
     <input type="hidden" name="_captcha" value="false">
     <input type="text" name="_honey" style="display:none;">
-    <input type="hidden" name="_recaptcha" value="true">
+    <input type="hidden" name="_template" value="table">
+
+    <button type="submit">Жіберу</button>
+</form>
     
     <button type="submit">Отправить</button>
 </form>

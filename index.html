@@ -31,43 +31,50 @@
             margin: 20px 0;
             color: #555;
         }
-        .form-container {
-            margin-top: 20px;
-            text-align: left;
-        }
-        .form-container label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
-        .form-container input, .form-container select, .form-container button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .form-container button {
-            background: #d36b6b;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-        }
+        /* Фото-слайдер */
         .photo-container {
+            position: relative;
             width: 100%;
             max-width: 650px;
             margin: auto;
+            overflow: hidden;
+        }
+        .photo-slides {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            width: 400%; /* Чтобы все изображения поместились в ряд */
+        }
+        .photo-slide {
+            min-width: 100%;
+            box-sizing: border-box;
             text-align: center;
         }
         .photo {
             width: 100%;
             max-width: 650px;
-            height: auto;
             border-radius: 10px;
             border: 5px solid #d36b6b;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        .navigation-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .prev, .next {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
@@ -75,7 +82,16 @@
     <div class="container">
         <h1>Аяулы анамызға 80 жас!</h1>
         <div class="photo-container">
-            <img src="https://i.imgur.com/4ha7QbF.jpeg" alt="Фото 1" class="photo">
+            <div class="photo-slides">
+                <div class="photo-slide"><img src="https://i.imgur.com/4ha7QbF.jpeg" alt="Фото 1" class="photo"></div>
+                <div class="photo-slide"><img src="https://i.imgur.com/egLQsAr.jpeg" alt="Фото 2" class="photo"></div>
+                <div class="photo-slide"><img src="https://i.imgur.com/FLiusd0.jpeg" alt="Фото 3" class="photo"></div>
+                <div class="photo-slide"><img src="https://i.imgur.com/8hWVArg.jpeg" alt="Фото 4" class="photo"></div>
+            </div>
+            <div class="navigation-buttons">
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
         </div>
         <p class="details">Біз сізді құрметті анамыздың 80 жылдық мерейтойына шақырамыз!</p>
         <p class="details"><strong>Күні:</strong> 19 сәуір 2025 жыл</p>
@@ -96,6 +112,30 @@
         </form>
     </div>
 </div>
+<script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.photo-slide');
+    const totalSlides = slides.length;
+
+    function updateSlider() {
+        document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
+    }
+
+    document.querySelector('.next').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    });
+
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+    }, 4000);
+</script>
 
 </body>
 </html>

@@ -41,8 +41,8 @@
         }
         .photo-slides {
             display: flex;
+            flex-wrap: nowrap;
             transition: transform 0.8s ease-in-out;
-            width: 400%; /* Чтобы все изображения поместились в ряд */
         }
         .photo-slide {
             min-width: 100%;
@@ -97,44 +97,30 @@
         <p class="details"><strong>Күні:</strong> 19 сәуір 2025 жыл</p>
         <p class="details"><strong>Уақыты:</strong> 13:00</p>
         <p class="details"><strong>Өтетін орны:</strong> "Жетісу" мейрамханасы</p>
-        <div class="form-container">
-            <h2>Сіз келе аласыз ба?</h2>
-            <form action="https://formsubmit.co/holiday190425@gmail.com" method="POST">
-                <label for="name">Аты-жөніңіз:</label>
-                <input type="text" id="name" name="name" required><br><br><label for="attendance">Қатысуыңыз:</label>
-            <select id="attendance" name="attendance">
-                <option value="yes">Иә, міндетті түрде келемін</option>
-                <option value="maybe">Әлі белгісіз</option>
-                <option value="no">Өкінішке орай, келе алмаймын</option>
-            </select><br><br>
-            
-            <button type="submit">Жіберу</button>
-        </form>
     </div>
-</div>
-<script>
-    let currentIndex = 0;
-    const slides = document.querySelectorAll('.photo-slide');
-    const totalSlides = slides.length;
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let currentIndex = 0;
+            const slides = document.querySelectorAll('.photo-slide');
+            const totalSlides = slides.length;function updateSlider() {
+            document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
+        }
 
-    function updateSlider() {
-        document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
-    }
+        document.querySelector('.next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        });
 
-    document.querySelector('.next').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
+        document.querySelector('.prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }, 4000);
     });
-
-    document.querySelector('.prev').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    });
-
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
-    }, 4000);
 </script>
 
 </body>

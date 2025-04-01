@@ -40,7 +40,7 @@
             margin: 10px 0 5px;
             font-weight: bold;
         }
-        .form-container select, .form-container button {
+        .form-container input, .form-container select, .form-container button {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -55,11 +55,28 @@
             cursor: pointer;
             font-size: 18px;
         }
+        .photo-container {
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+            text-align: center;
+        }
+        .photo {
+            width: 100%;
+            max-width: 650px;
+            height: auto;
+            border-radius: 10px;
+            border: 5px solid #d36b6b;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Аяулы анамызға 80 жас!</h1>
+        <div class="photo-container">
+            <img src="https://i.imgur.com/4ha7QbF.jpeg" alt="Фото 1" class="photo">
+        </div>
         <p class="details">Біз сізді құрметті анамыздың 80 жылдық мерейтойына шақырамыз!</p>
         <p class="details"><strong>Күні:</strong> 19 сәуір 2025 жыл</p>
         <p class="details"><strong>Уақыты:</strong> 13:00</p>
@@ -67,15 +84,18 @@
         <div class="form-container">
             <h2>Сіз келе аласыз ба?</h2>
             <form action="https://formsubmit.co/holiday190425@gmail.com" method="POST">
-                <label for="attendance">Қатысуыңыз:</label>
-                <select id="attendance" name="attendance">
-                    <option value="yes">Иә, міндетті түрде келемін</option>
-                    <option value="maybe">Әлі белгісіз</option>
-                    <option value="no">Өкінішке орай, келе алмаймын</option>
-                </select><br><br>
-                <button type="submit">Жіберу</button>
-            </form>
-        </div>
+                <label for="name">Аты-жөніңіз:</label>
+                <input type="text" id="name" name="name" required><br><br><label for="attendance">Қатысуыңыз:</label>
+            <select id="attendance" name="attendance">
+                <option value="yes">Иә, міндетті түрде келемін</option>
+                <option value="maybe">Әлі белгісіз</option>
+                <option value="no">Өкінішке орай, келе алмаймын</option>
+            </select><br><br>
+            
+            <button type="submit">Жіберу</button>
+        </form>
     </div>
+</div>
+
 </body>
 </html>

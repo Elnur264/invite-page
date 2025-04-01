@@ -138,25 +138,22 @@
     <script>
         let currentIndex = 0;
         const slides = document.querySelectorAll('.photo-slide');
-        const totalSlides = slides.length;function updateSlider() {
-        document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
-    }
-
-    document.querySelector('.next').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
-    });
-
-    document.querySelector('.prev').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    });
-
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
-    }, 4000);
-</script>
-
+        const totalSlides = slides.length;
+        function updateSlider() {
+            document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
+        }
+        document.querySelector('.next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        });
+        document.querySelector('.prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }, 4000);
+    </script>
 </body>
 </html>

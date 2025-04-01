@@ -42,16 +42,17 @@
         .photo-slides {
             display: flex;
             transition: transform 0.8s ease-in-out;
-            width: 100%; /* Бұл енді 100% болады */
+            width: 100%;
         }
         .photo-slide {
-            min-width: 100%; /* Әрбір слайдтың ені 100% */
+            min-width: 100%;
             box-sizing: border-box;
             text-align: center;
         }
         .photo {
             width: 100%;
-            max-width: 650px;
+            height: 100%;
+            object-fit: cover; /* Обеспечиваем правильное заполнение пространства */
             border-radius: 10px;
             border: 5px solid #d36b6b;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);

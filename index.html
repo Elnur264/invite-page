@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="kk">
+<!DOCTYPE html>
+<html lang="kk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +27,11 @@
             color: #d36b6b;
             font-size: 32px;
         }
+        .details {
+            font-size: 18px;
+            margin: 20px 0;
+            color: #555;
+        }
         .photo-container {
             position: relative;
             width: 100%;
@@ -36,15 +42,17 @@
         .photo-slides {
             display: flex;
             transition: transform 0.8s ease-in-out;
+            width: 100%;
         }
         .photo-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
         }
         .photo {
-            max-width: 100%;
-            height: auto;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Обеспечиваем правильное заполнение пространства */
             border-radius: 10px;
             border: 5px solid #d36b6b;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
@@ -69,6 +77,30 @@
         .prev:hover, .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+        .form-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .form-container input, .form-container select, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .form-container button {
+            background: #d36b6b;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -86,29 +118,44 @@
                 <button class="next">&#10095;</button>
             </div>
         </div>
+        <p class="details">Біз сізді құрметті анамыздың 80 жылдық мерейтойына шақырамыз!</p>
+        <p class="details"><strong>Күні:</strong> 19 сәуір 2025 жыл</p>
+        <p class="details"><strong>Уақыты:</strong> 13:00</p>
+        <p class="details"><strong>Өтетін орны:</strong> "Жетісу" мейрамханасы</p>
+        <div class="form-container">
+            <h2>Сіз келе аласыз ба?</h2>
+            <form action="https://formsubmit.co/holiday190425@gmail.com" method="POST">
+                <label for="name">Аты-жөніңіз:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="attendance">Қатысуыңыз:</label>
+                <select id="attendance" name="attendance">
+                    <option value="yes">Иә, міндетті түрде келемін</option>
+                    <option value="maybe">Әлі белгісіз</option>
+                    <option value="no">Өкінішке орай, келе алмаймын</option>
+                </select>
+                <button type="submit">Жіберу</button>
+            </form>
+        </div>
     </div>
     <script>
         let currentIndex = 0;
         const slides = document.querySelectorAll('.photo-slide');
         const totalSlides = slides.length;
-        const photoSlidesContainer = document.querySelector('.photo-slides');function updateSlider() {
-        let currentSlide = slides[currentIndex].querySelector('img');
-        let container = document.querySelector('.photo-container');
-        container.style.height = `${currentSlide.clientHeight}px`;
-        photoSlidesContainer.style.transform = `translateX(${-currentIndex * 100}%)`;
-    }
-
-    document.querySelector('.next').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlider();
-    });
-    document.querySelector('.prev').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    });
-    
-    window.addEventListener('load', updateSlider);
-</script>
-
+        function updateSlider() {
+            document.querySelector('.photo-slides').style.transform = `translateX(${-currentIndex * 100}%)`;
+        }
+        document.querySelector('.next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        });
+        document.querySelector('.prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }, 4000);
+    </script>
 </body>
 </html>
